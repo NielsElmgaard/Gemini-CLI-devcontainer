@@ -10,8 +10,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
        git \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Node.js 20 LTS (Node 24 is Current/non-LTS)
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+# Install Node.js 24
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
     && apt-get install -y --no-install-recommends nodejs \
     && rm -rf /var/lib/apt/lists/*
 
