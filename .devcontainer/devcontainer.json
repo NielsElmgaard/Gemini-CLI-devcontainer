@@ -1,0 +1,36 @@
+{
+    "name": "RecipeAI",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "runArgs": [
+        "--cap-add=NET_ADMIN"
+    ],
+    "mounts": [
+        "source=secure-gemini-bashhistory,target=/commandhistory,type=volume",
+        "source=secure-gemini-config,target=/home/vscode/.config,type=volume",
+        "source=secure-gemini-auth,target=/home/vscode/.gemini,type=volume"
+    ],
+    "remoteEnv": {
+        "HISTFILE": "/commandhistory/.bash_history"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "esbenp.prettier-vscode",
+                "github.vscode-github-actions",
+                "usernamehw.errorlens",
+                "github.vscode-pull-request-github",
+                "shd101wyy.markdown-preview-enhanced",
+                "mathematic.vscode-pdf",
+                "pmndrs.pmndrs",
+                "vscode-icons-team.vscode-icons"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash"
+            }
+        }
+    },
+    "postStartCommand": "sudo /usr/local/bin/firewall.sh",
+    "remoteUser": "vscode"
+}
