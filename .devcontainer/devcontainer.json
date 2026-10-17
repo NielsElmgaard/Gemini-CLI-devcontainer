@@ -1,5 +1,5 @@
 {
-    "name": "Niels With Them Skills",
+    "name": "Devcontainer template",
     "build": {
         "dockerfile": "Dockerfile"
     },
