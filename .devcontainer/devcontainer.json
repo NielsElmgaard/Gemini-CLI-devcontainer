@@ -1,10 +1,17 @@
 {
-    "name": "RecipeAI",
+    "name": "Niels With Them Skills",
     "build": {
         "dockerfile": "Dockerfile"
     },
     "runArgs": [
-        "--cap-add=NET_ADMIN"
+        "--cap-drop=ALL",
+        "--cap-add=NET_ADMIN",
+        "--cap-add=SETUID",
+        "--cap-add=SETGID",
+        "--cap-add=CHOWN",
+        "--cap-add=DAC_OVERRIDE",
+        "--cap-add=FOWNER",
+        "--cap-add=AUDIT_WRITE"
     ],
     "mounts": [
         "source=secure-gemini-bashhistory,target=/commandhistory,type=volume",
@@ -24,7 +31,8 @@
                 "shd101wyy.markdown-preview-enhanced",
                 "mathematic.vscode-pdf",
                 "pmndrs.pmndrs",
-                "vscode-icons-team.vscode-icons"
+                "vscode-icons-team.vscode-icons",
+                "ritwickdey.liveserver"
             ],
             "settings": {
                 "terminal.integrated.defaultProfile.linux": "bash"

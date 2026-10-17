@@ -8,10 +8,11 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
        curl \
        ca-certificates \
        git \
+       python3 \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Node.js 24
-RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
+# Install Node.js 20 LTS
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y --no-install-recommends nodejs \
     && rm -rf /var/lib/apt/lists/*
 
@@ -29,7 +30,9 @@ RUN mkdir -p /commandhistory /home/vscode/.gemini /home/vscode/.config \
 # Install the firewall script, strip CRLF, and scope sudo execution
 COPY firewall.sh /usr/local/bin/firewall.sh
 RUN sed -i 's/\r$//' /usr/local/bin/firewall.sh \
+    && chown root:root /usr/local/bin/firewall.sh \
     && chmod 755 /usr/local/bin/firewall.sh \
+    && rm -f /etc/sudoers.d/vscode \
     && echo "vscode ALL=(root) NOPASSWD: /usr/local/bin/firewall.sh" > /etc/sudoers.d/firewall \
     && chmod 440 /etc/sudoers.d/firewall
 
